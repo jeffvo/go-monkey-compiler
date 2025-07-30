@@ -7,9 +7,19 @@ import (
 	"strings"
 
 	"github.com/jeffvo/go-monkey-compiler/ast"
+	"github.com/jeffvo/go-monkey-compiler/code"
 )
 
 type BuiltinFunction func(args ...Object) Object
+
+type CompiledFunction struct {
+	Instructions code.Instructions
+}
+
+func (cf *CompiledFunction) Type() ObjectType { return COPMILED_FUNCTION_OBJ }
+func (cf *CompiledFunction) Inspect() string {
+	return fmt.Sprintf("CompiledFunction[%p]", cf)
+}
 
 type ObjectType string
 
@@ -26,8 +36,9 @@ const (
 	FUNCTION_OBJ = "FUNCTION"
 	BUILTIN_OBJ  = "BUILTIN"
 
-	ARRAY_OBJ = "ARRAY"
-	HASH_OBJ  = "HASH"
+	ARRAY_OBJ             = "ARRAY"
+	HASH_OBJ              = "HASH"
+	COPMILED_FUNCTION_OBJ = "COMPILED_FUNCTION_OBJ"
 )
 
 type HashKey struct {
