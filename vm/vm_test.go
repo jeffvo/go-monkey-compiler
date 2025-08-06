@@ -294,7 +294,7 @@ func TestIndexExpressions(t *testing.T) {
 	runVmTests(t, tests)
 }
 
-func TestCallingFUnctionsWithoutArgumentsm(t *testing.T) {
+func TestCallingFunctionsWithoutArgumentsm(t *testing.T) {
 	tests := []vmTestCase{
 		{
 			input:    `let fivePlusTen = fn() { 5 + 10; }; fivePlusTen();`,
@@ -320,9 +320,22 @@ func TestFunctionsWithReturnStatement(t *testing.T) {
 			expected: 99,
 		},
 		{
-			input: ` let earlyExit = fn() { return 99; return 100; }; earlyExit(); `,
-
+			input:    ` let earlyExit = fn() { return 99; return 100; }; earlyExit(); `,
 			expected: 99,
+		},
+	}
+	runVmTests(t, tests)
+}
+
+func TestFunctionsWithoutReturnValue(t *testing.T) {
+	tests := []vmTestCase{
+		{
+			input:    ` let noReturn = fn() { }; noReturn();`,
+			expected: Null,
+		},
+		{
+			input:    ` let noReturn = fn() { }; let noReturnTwo = fn() { noReturn(); }; noReturn(); noReturnTwo(); `,
+			expected: Null,
 		},
 	}
 	runVmTests(t, tests)
