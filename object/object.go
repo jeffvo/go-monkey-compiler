@@ -14,6 +14,7 @@ type BuiltinFunction func(args ...Object) Object
 
 type CompiledFunction struct {
 	Instructions code.Instructions
+	NumLocals    int
 }
 
 func (cf *CompiledFunction) Type() ObjectType { return COPMILED_FUNCTION_OBJ }
