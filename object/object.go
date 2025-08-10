@@ -13,8 +13,9 @@ import (
 type BuiltinFunction func(args ...Object) Object
 
 type CompiledFunction struct {
-	Instructions code.Instructions
-	NumLocals    int
+	Instructions  code.Instructions
+	NumLocals     int
+	NumParameters int
 }
 
 func (cf *CompiledFunction) Type() ObjectType { return COPMILED_FUNCTION_OBJ }
